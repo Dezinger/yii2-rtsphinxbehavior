@@ -8,11 +8,10 @@ Either run
 ~~~
 php composer.phar require mulat/yii2-rtsphinxbehavior
 ~~~
-or add
+or add to the require section of your composer.json file:
 ~~~
 "mulat/yii2-rtsphinxbehavior": "*"
 ~~~
-to the require section of your composer.json file.
 
 
 If you are using fork then add to composer.json file:
