@@ -1,6 +1,31 @@
 # Yii2 Behavior for working with Sphinx RealTime index
 
-### How to attach
+
+## Installation
+The preferred way to install this extension is through [composer](https://getcomposer.org/).
+
+Either run
+~~~
+php composer.phar require mulat/yii2-rtsphinxbehavior
+~~~
+or add
+~~~
+"mulat/yii2-rtsphinxbehavior": "*"
+~~~
+to the require section of your composer.json file.
+
+
+If you are using fork then add to composer.json file:
+~~~
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@bitbucket.org:dezinger/yii2-rtsphinxbehavior.git"
+        },
+    ]
+~~~
+
+## How to attach
 
 ```
 namespace modules\blog\models;
@@ -26,7 +51,7 @@ class Post extends \yii\db\ActiveRecord {
 In this very example the `rtIndex` parameter gets value from blog-module paramener `sphinxRtIndex`.
 Then provide the names of attributes and fields from our main document fetch query, that is described in sphinx.conf in the source block.
 
-### How to configure RT index for Sphinx
+## How to configure RT index for Sphinx
 
 ```
 source is_src
@@ -84,11 +109,6 @@ index is_rt
 }
 ```
 
-### How it works
+## How it works
 
 `RtSphinxBehavior` triggers on insert | update | delete events, processed by `ActiveRecord` class.
-
-### Resume
-
-In the mentioned above example the `RtSphinxBehavior.php` was placed under `modules\blog\components` namespace.
-Such structure describes the situation when the behavior is used only for one module. Here it is the `blogModule`.  
