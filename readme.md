@@ -20,7 +20,7 @@ If you are using fork then add to composer.json file:
     "repositories": [
         {
             "type": "git",
-            "url": "git@bitbucket.org:dezinger/yii2-rtsphinxbehavior.git"
+            "url": "git@github.com:Dezinger/yii2-rtsphinxbehavior.git"
         }
     ]
 ~~~
