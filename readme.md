@@ -21,7 +21,7 @@ If you are using fork then add to composer.json file:
         {
             "type": "git",
             "url": "git@bitbucket.org:dezinger/yii2-rtsphinxbehavior.git"
-        },
+        }
     ]
 ~~~
 
