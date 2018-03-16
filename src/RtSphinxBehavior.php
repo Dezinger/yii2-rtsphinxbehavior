@@ -1,5 +1,6 @@
 <?php
-namespace modules\blog\components;
+
+namespace Mulat\Yii2;
 
 use yii\db\ActiveRecord;
 use yii\base\Behavior;
@@ -10,7 +11,8 @@ use yii\base\InvalidConfigException;
  * @package modules\blog\components
  *  Helpful behavior for handling synchronization with Sphinx realTime index
  */
-class RtSphinxBehavior extends Behavior {
+class RtSphinxBehavior extends Behavior 
+{
 
     /**
      * @var string provide the name of realtime index from you sphinx.conf file
