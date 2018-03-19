@@ -6,23 +6,14 @@ The preferred way to install this extension is through [composer](https://getcom
 
 Either run
 ~~~
-php composer.phar require mulat/yii2-rtsphinxbehavior
+php composer.phar require dezinger/yii2-rtsphinxbehavior
 ~~~
-or add to the require section of your composer.json file:
+or add
 ~~~
-"mulat/yii2-rtsphinxbehavior": "*"
+"dezinger/yii2-rtsphinxbehavior": "*"
 ~~~
+to the require section of your composer.json file.
 
-
-If you are using fork then add to composer.json file:
-~~~
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:Dezinger/yii2-rtsphinxbehavior.git"
-        }
-    ]
-~~~
 
 ## How to attach
 
@@ -39,8 +30,18 @@ class Post extends \yii\db\ActiveRecord {
                         'class' => RtSphinxBehavior::className(),
                         'rtIndex' => Yii::$app->getModule('blog')->getParam('sphinxRtIndex'),
                         'idAttributeName' => 'id',
-                        'rtFieldNames' => ['name', 'title', 'description', 'text'],
-                        'rtAttributeNames' => ['category_id'],
+                        'rtFieldNames' => [
+                            'name', 
+                            'title', 
+                            'description', 
+                            'text'
+                        ],
+                        'rtAttributeNames' => [
+                            'category_id', //RT attr and Post same name
+                            'post_id' => 'id', //Attr mapping examle: rt.post_id = post.id
+                            'parent_category_id' => 'category.parent_id', //Attr shortcut syntax example
+                            'rating' => functon($model){return floatval($model->rating);}, //Usage closure example
+                        ],
                         'enabled' => Yii::$app->getModule('blog')->getParam('isSphinxEnabled'),
                     ],
                 ];   

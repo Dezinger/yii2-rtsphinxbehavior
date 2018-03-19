@@ -1,15 +1,15 @@
 <?php
 
-namespace Mulat\Yii2;
+namespace Dezinger\Yii2;
 
 use yii\db\ActiveRecord;
 use yii\base\Behavior;
 use yii\base\InvalidConfigException;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class RtSphinxBehavior
- * @package modules\blog\components
- *  Helpful behavior for handling synchronization with Sphinx realTime index
+ * Helpful behavior for handling synchronization with Sphinx realTime index
  */
 class RtSphinxBehavior extends Behavior 
 {
@@ -39,7 +39,9 @@ class RtSphinxBehavior extends Behavior
      */
     public $enabled = false;
 
-    public function init() {
+    
+    public function init() 
+    {
         parent::init();
 
         if ($this->rtIndex === null) {
@@ -56,7 +58,9 @@ class RtSphinxBehavior extends Behavior
         }
     }
 
-    public function events() {
+    
+    public function events() 
+    {
         return [
             ActiveRecord::EVENT_AFTER_INSERT => 'afterInsert',
             ActiveRecord::EVENT_AFTER_UPDATE => 'afterUpdate',
@@ -64,15 +68,21 @@ class RtSphinxBehavior extends Behavior
         ];
     }
 
-    public function afterInsert() {
+    
+    public function afterInsert() 
+    {
         return $this->enabled && $this->replace();
     }
 
-    public function afterUpdate() {
+    
+    public function afterUpdate() 
+    {
         return $this->enabled && $this->replace();
     }
 
-    public function afterDelete() {
+    
+    public function afterDelete() 
+    {
         if (!$this->enabled) {
             return false;
         }
@@ -88,25 +98,30 @@ class RtSphinxBehavior extends Behavior
         return \Yii::$app->sphinx->createCommand($sql, $params)->execute();
     }
 
-    protected function getColumns() {
+    
+    protected function getColumns() 
+    {
         $columns = [$this->idAttributeName => $this->owner->getAttribute($this->idAttributeName)];
         $columns = $this->addColumns($columns, $this->rtFieldNames);
         $columns = $this->addColumns($columns, $this->rtAttributeNames);
         return $columns;
     }
 
-    protected function addColumns($columns, $fieldNames) {
-        foreach($fieldNames as $name) {
-            $value = $this->owner->getAttribute($name);
-            if (!is_string($value)) {
-                $value = strval($value);
-            }
-            $columns[$name] = $value;
+    
+    protected function addColumns($columns, $fieldNames) 
+    {
+        foreach($fieldNames as $rt => $name) {
+            $value = ArrayHelper::getValue($this->owner, $name);
+            $rt = is_int($rt)?$name:$rt;
+            $columns[$rt] = $value;
         }
+        
         return $columns;
     }
 
-    protected function replace() {
+    
+    protected function replace() 
+    {
         $params = [];
 
         $sql = \Yii::$app->sphinx->getQueryBuilder()

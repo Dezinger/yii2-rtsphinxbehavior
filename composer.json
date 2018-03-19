@@ -1,5 +1,5 @@
 {
-    "name": "mulat/yii2-rtsphinxbehavior",
+    "name": "dezinger/yii2-rtsphinxbehavior",
     "description": "Yii2 Behavior for working with Sphinx RealTime index",
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
