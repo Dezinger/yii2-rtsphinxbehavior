@@ -10,7 +10,7 @@ php composer.phar require dezinger/yii2-rtsphinxbehavior
 ~~~
 or add
 ~~~
-"dezinger/yii2-rtsphinxbehavior": "*"
+"dezinger/yii2-rtsphinxbehavior": "dev-master"
 ~~~
 to the require section of your composer.json file.
 
